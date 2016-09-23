@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="galtycoonApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,24 +30,44 @@
 #middle {
 	border: 1px #eee solid;
 }
+.list-group-item {
+	padding: 5px 15px;
+}
 </style>
-<body>
+<body ng-controller="GalTycoonCtrl">
   
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
-			<label>Balance: </label><label id="myBal">0</label>
+			<label>Date: </label><label id="theDate">0</label><br>
+			<label>Balance: </label><label id="myBal">0</label><br>
+			<button ng-click="startTimer()" class="btn-success btn-sm">Start</button>
+			<button ng-click="stopTimer()" class="btn-danger btn-sm">Stop</button>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2" id="leftCol">
-			<a href="sherpa1.html">Sherpa 1</a>
+		<div class="col-md-3" id="leftCol">
+			<a href="outpost1.html">Outpost 1</a>
+			<p>Raw Materials</p>
+			<ul class="list-group" style="list-style:none;">
+				<li class="list-group-item">Ice:<span class="pull-xs-right">0</span></li>
+			</ul>
 		</div>
-		<div class="col-md-8" id="middle">
-			<p>Something</p>
+		<div class="col-md-7" id="middle">
+			<p>Section: 001</p>
 		</div>
 		<div class="col-md-2" id="rightCol">
-			<label>Sherpa1: </label><label id="sherpa1Progress">0</label>
+			<p>Gather Drones</p>
+			<!-- angular list iterator of drones -->
+			<div id="gatherDrones" >
+			<ul class="list-group" style="list-style:none;">
+				<li class="list-group-item">Gather drone 1</li>
+					<ul class="list-group" style="list-style:none;">
+						<li class="list-group-item">Cargo:<span ng-model="gatherdrones.cargo" class="pull-xs-right">{{gatherdrones.cargo}}/{{gatherdrones.cargoCapacity}}</span></li>
+						<li class="list-group-item">Status:<span class="pull-xs-right">{{gatherdrones.status}}</span></li>
+					</ul>
+			</ul>
+			<div>
 		</div>
 	</div>
 
@@ -58,21 +78,18 @@
 <!-- endbuild -->
 <!-- build:js scripts/main.js -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- <script src="scripts/services.js"></script> -->
+	<script src="../bower_components/angular/angular.min.js"></script>
+    <script src="scripts/galtycooncontroller.js"></script>
 <!-- endbuild -->
 <script>
-	var myVar = setInterval(myTimer, 500);
+	
+	
+	//var myVar = setInterval(myTimer, 1000);
 	var loc=0;
-	function myTimer() {
-		loc += 100;
-		
-		document.getElementById("sherpa1Progress").innerHTML = loc;
-		if (loc >= 500) {
-			clearInterval(myVar);
-			$("#myBal").text("$100");
-			
-		}
-	}
+	var dt = new Date();
+	$("#theDate").text(dt.toUTCString());
+	
+	
 </script>
 
 </body>
