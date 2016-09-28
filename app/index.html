@@ -61,11 +61,14 @@
 			<!-- angular list iterator of drones -->
 			<div id="gatherDrones" >
 			<ul class="list-group" style="list-style:none;">
-				<li class="list-group-item">Gather drone 1</li>
+				<!--<li class="list-group-item">Gather drone 1</li> -->
+				<li ng-repeat="drone in gatherdrones" >{{drone.id}}
 					<ul class="list-group" style="list-style:none;">
-						<li class="list-group-item">Cargo:<span ng-model="gatherdrones.cargo" class="pull-xs-right">{{gatherdrones.cargo}}/{{gatherdrones.cargoCapacity}}</span></li>
-						<li class="list-group-item">Status:<span class="pull-xs-right">{{gatherdrones.status}}</span></li>
+						<li class="list-group-item">Cargo:<span ng-model="drone.cargo" class="pull-xs-right">{{drone.cargo}}/{{drone.cargoCapacity}}</span></li>
+						<li class="list-group-item">Status:<span class="pull-xs-right">{{drone.status}}</span></li>
+						</li>
 					</ul>
+				</li>
 			</ul>
 			<div>
 		</div>

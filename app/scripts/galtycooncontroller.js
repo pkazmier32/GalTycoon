@@ -1,7 +1,11 @@
 var app = angular.module('galtycoonApp', [])
 	.controller('GalTycoonCtrl', ['$scope', '$interval', function ($scope, $interval) {
 	
-		$scope.gatherdrones = {cargo:0, cargoCapacity:100, status:"Docked"};
+		$scope.gatherdrones = [
+				{id:"GatherDroneOne", cargo:0, cargoCapacity:100, status:"Docked"},
+				{id:"GatherDroneTwo", cargo:0, cargoCapacity:100, status:"Docked"}
+			];
+			
 		var timer;
 		
 		var init = function () {
@@ -18,14 +22,24 @@ var app = angular.module('galtycoonApp', [])
 		};
 		
 		function processTurn() {
+			angular.forEach($scope.gatherdrones, function (value, key) {
+				if (value.cargo >= value.cargoCapacity) {
+					value.cargo = value.cargoCapacity;
+					value.status="Full";
+				} else {
+					value.cargo+=5;
+					value.status="Gathering";
+				}
+			}); 
 			
+			/*
 			if ($scope.gatherdrones.cargo >= $scope.gatherdrones.cargoCapacity) {
 				$scope.gatherdrones.cargo = $scope.gatherdrones.cargoCapacity;
 				$scope.gatherdrones.status="Full";
 			} else {
-				$scope.gatherdrones.cargo+=10;
+				$scope.gatherdrones.cargo+=5;
 				$scope.gatherdrones.status="Gathering";
-			}
+			} */
 		}
 				
 		$scope.stopTimer = function() {
