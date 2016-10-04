@@ -64,9 +64,13 @@
 				<!--<li class="list-group-item">Gather drone 1</li> -->
 				<li ng-repeat="drone in gatherdrones" >{{drone.id}}
 					<ul class="list-group" style="list-style:none;">
-						<li class="list-group-item">Cargo:<span ng-model="drone.cargo" class="pull-xs-right">{{drone.cargo}}/{{drone.cargoCapacity}}</span></li>
+						<li class="list-group-item">Cargo:<span ng-model="drone.cargo" class="pull-xs-right">{{drone.cargoLoaded}}/{{drone.cargoCapacity}}</span></li>
 						<li class="list-group-item">Status:<span class="pull-xs-right">{{drone.status}}</span></li>
-						</li>
+						<li ng-repeat="cargoType in gatherdrones.cargo" >{{cargo.type}}
+							<ul class="list-group" style="list-style:none;">
+								<li class="list-group-item">{{cargoType.type}}<span ng-model="drone.cargo" class="pull-xs-right">{{cargoType.amount}}</span></li>
+							</ul>
+						</li> 
 					</ul>
 				</li>
 			</ul>
