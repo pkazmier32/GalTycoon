@@ -33,6 +33,11 @@
 .list-group-item {
 	padding: 5px 15px;
 }
+
+#selectOutpost {
+	padding:5px 0;
+	margin-left:-15px
+}
 </style>
 <body ng-controller="GalTycoonCtrl">
   
@@ -41,17 +46,41 @@
 		<div class="col-md-6">
 			<label>Date: </label><label id="theDate">0</label><br>
 			<label>Balance: </label><label id="myBal">0</label><br>
-			<button ng-click="startTimer()" class="btn-success btn-sm">Start</button>
-			<button ng-click="stopTimer()" class="btn-danger btn-sm">Stop</button>
+			<button ng-click="startGDTimer()" class="btn-success btn-sm">Start</button>
+			<button ng-click="stopGDTimer()" class="btn-danger btn-sm">Stop</button>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3" id="leftCol">
-			<a href="outpost1.html">Outpost 1</a>
-			<p>Raw Materials</p>
-			<ul class="list-group" style="list-style:none;">
-				<li class="list-group-item">Ice:<span class="pull-xs-right">0</span></li>
-			</ul>
+			<div class="form-group form-group-sm" id="selectOutpost">
+				<label class="col-sm-6 control-label pull-sm-left" for="outpostsSelect">Select outpost</label>
+				<div class="col-sm-4 pull-sm-right">
+					<select class="input-sm" ng-model="selectedOutpost" name="outpostsSelect" id="outpostsSelect" ng-change="outpostSelected()">
+						<option ng-repeat="o in outposts" value="{{o.id}}">{{o.id}}</option>
+					</select>
+				</div>
+			</div>
+			<br>
+			<div id="outpost" >
+				<ul class="list-group" style="list-style:none;">
+					<li ng-repeat="op in outpost">Outpost: {{op.id}}
+					<ul>
+						<li>Status: <span class="pull-xs-right">{{op.status}}</span></li>
+						<li>Storage: <span class="pull-xs-right">{{op.stored}}/{{op.storageCapacity}}</span></li>
+						<li>Raw Materials</li>
+						<ul class="list-group" style="list-style:none;">
+							<li class="list-group-item" ng-repeat="item in op.materials">&nbsp;&nbsp;{{item.type}}: <span class="pull-xs-right">{{item.amount}}</span></li>
+						</ul>
+					</ul>
+					</li>
+				</ul>
+				<!--<ul class="list-group" style="list-style:none;">
+					<li ng-repeat="item in outpost.materials">{{item.type}}</li>
+				</ul>
+				<ul class="list-group" style="list-style:none;">
+					<li ng-repeat="proc in outposts.processors">{{proc.rawmaterial}}</li>
+				</ul>-->
+			</div>
 		</div>
 		<div class="col-md-7" id="middle">
 			<p>Section: 001</p>
@@ -61,16 +90,14 @@
 			<!-- angular list iterator of drones -->
 			<div id="gatherDrones" >
 			<ul class="list-group" style="list-style:none;">
-				<!--<li class="list-group-item">Gather drone 1</li> -->
 				<li ng-repeat="drone in gatherdrones" >{{drone.id}}
 					<ul class="list-group" style="list-style:none;">
-						<li class="list-group-item">Cargo:<span ng-model="drone.cargo" class="pull-xs-right">{{drone.cargoLoaded}}/{{drone.cargoCapacity}}</span></li>
-						<li class="list-group-item">Status:<span class="pull-xs-right">{{drone.status}}</span></li>
-						<li ng-repeat="cargoType in gatherdrones.cargo" >{{cargo.type}}
+						<li class="list-group-item">Status: <span class="pull-xs-right">{{drone.status}}</span></li>
+						<li class="list-group-item">Cargo: <span ng-model="drone.cargo" class="pull-xs-right">{{drone.cargoLoaded}}/{{drone.cargoCapacity}}</span></li>
 							<ul class="list-group" style="list-style:none;">
-								<li class="list-group-item">{{cargoType.type}}<span ng-model="drone.cargo" class="pull-xs-right">{{cargoType.amount}}</span></li>
+								<li ng-repeat="cargo in drone.cargo" class="list-group-item">&nbsp;&nbsp;{{cargo.type}}: <span ng-model="cargo" class="pull-xs-right">{{cargo.amount}}</span></li>
 							</ul>
-						</li> 
+						</li>
 					</ul>
 				</li>
 			</ul>
