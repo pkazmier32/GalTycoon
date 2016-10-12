@@ -71,6 +71,14 @@
 						<ul class="list-group" style="list-style:none;">
 							<li class="list-group-item" ng-repeat="item in op.materials">&nbsp;&nbsp;{{item.type}}: <span class="pull-xs-right">{{item.amount}}</span></li>
 						</ul>
+						<br>
+						<li>Processing</li>
+						<ul class="list-group" style="list-style:none;">
+							<li class="list-group-item" ng-repeat="proc in op.processors">&nbsp;&nbsp;{{proc.type}}: <span class="pull-xs-right">{{proc.capacity}}</span>
+								<ul class="list-group" style="list-style:none;">
+								</ul>
+							</li>
+						</ul>
 					</ul>
 					</li>
 				</ul>

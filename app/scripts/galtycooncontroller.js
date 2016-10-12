@@ -10,16 +10,21 @@ var app = angular.module('galtycoonApp', [])
 		
 		
 		outposts = [
-			{id:"outpostOne", storageCapacity:100, stored:0, status:"Ready", materials:[{"type":"C-Type","amount":50},{"type":"S-Type","amount":0}, {"type":"Ice","amount":0}],	droneCapacity:5, processors:[{"rawmaterial":"C-Type","number":1}, {"rawmaterial":"S-type", "number":1} ]},
+			{id:"outpostOne", storageCapacity:100, stored:0, status:"Ready", materials:[{"type":"C-Type","amount":0},{"type":"S-Type","amount":0}, {"type":"Ice","amount":0}],	droneCapacity:5, processors:[{type:"Ice",capacity:1}, {type:"C-Type",capacity:1}, {type:"S-Type", capacity:1} ]},
 			{id:"outpostTwo", storageCapacity:300}
 		];
 		
 		
-/*		
-		$scope.processedmaterials = [
-			{"input:C-Type", outputs=[{"item":"Carbon", amount:5}, {"item":"Basic Metals", "amount":1}, {"item":"water", "amount":1}]}
+		
+		processedateroidmaterials = [
+			{input:"C-Type", outputs=[{item:"Basic Metals", amount:1}, {item:"Water", amount:3}, {item:"Organic Semiconductors", amount:2}, {item:"Organic Compounds", amount:4}]},
+			{input:"Ice", outputs=[{item:"Hydrogen", amount:7}, {item:"Oxygen", amount:3}]},
 		];
-*/
+
+		basicmaterials = [
+			{output:"Solar Cells", inputs=[{item:"Organic Semiconductors", amount:2}, {item:"Silicon", amount:7}, {item:"Precious Metals", amount:1}]},
+		];
+		
 		$scope.outposts = outposts;
 		var gatherdrone_timer;
 		
